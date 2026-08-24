@@ -437,7 +437,7 @@ pre {
   font-weight: 600;
 }
 .g-def { font-size: 13px; color: var(--ink-muted); line-height: 1.55; }
-.g-card.hide { display: none; }
+.g-card.hide, .g-card.hide { display: none; }
 
 /* ─── PROGRESS BAR ────────────────────────────────────── */
 #pgbar {
@@ -472,7 +472,89 @@ mark { background: #fef08a; color: inherit; border-radius: 2px; padding: 0 1px; 
   #mob-toggle { display: block; }
   .tb-links { display: none; }
   .tb-search { width: 180px; }
+  .pair { grid-template-columns: 1fr; }
 }
+
+/* ─── WEB FUNDAMENTALS HELPERS ────────────────────────── */
+.pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 14px 0;
+}
+.pair .codeblock { margin: 0; }
+.pair-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px; letter-spacing: 1px; text-transform: uppercase;
+  color: var(--ink-muted); margin-bottom: 6px; font-weight: 500;
+}
+.bm {
+  font-family: 'DM Mono', monospace; font-size: 11px;
+  text-align: center; color: #5a3000;
+}
+.bm-margin { background: #fde8c8; border: 1px dashed #c8690a; padding: 18px 14px 14px; border-radius: 6px; }
+.bm-border { background: #f6d7a8; border: 8px solid #c8690a; padding: 0; }
+.bm-padding { background: #e0f2f0; padding: 18px 14px 14px; }
+.bm-content { background: #deeaf9; border: 1px solid #0057b8; padding: 18px 12px; color: #0a3060; font-weight: 600; font-family: 'DM Sans', sans-serif; font-size: 13px; }
+.bm-cap { font-size: 10px; letter-spacing: 1.2px; text-transform: uppercase; margin-bottom: 8px; opacity: 0.7; }
+.try {
+  background: var(--surface); border: 1px solid var(--rule);
+  border-radius: var(--r); padding: 16px; margin: 16px 0;
+}
+.try-head {
+  font-family: 'DM Mono', monospace; font-size: 10px;
+  letter-spacing: 1px; text-transform: uppercase;
+  color: var(--ink-muted); margin-bottom: 12px;
+}
+.flex-stage {
+  display: flex; gap: 8px; min-height: 88px;
+  background: var(--surface-2); border: 1px dashed var(--rule);
+  border-radius: 6px; padding: 10px;
+}
+.flex-stage > div {
+  background: var(--accent); color: #fff;
+  padding: 12px 16px; border-radius: 5px;
+  font-size: 13px; font-weight: 600; min-width: 64px; text-align: center;
+}
+.try-btns { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+.try-btns button {
+  font-family: 'DM Mono', monospace; font-size: 11px;
+  padding: 5px 10px; border-radius: 4px; cursor: pointer;
+  border: 1px solid var(--rule); background: var(--bg); color: var(--ink-soft);
+}
+.try-btns button.on { background: var(--ink); color: #fff; border-color: var(--ink); }
+.demo-form { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.demo-form input, .demo-form select {
+  font-family: 'DM Sans', sans-serif; font-size: 13px;
+  padding: 7px 10px; border: 1px solid var(--rule); border-radius: 5px;
+}
+.demo-form button, .try .go-btn {
+  font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 600;
+  padding: 7px 14px; border: none; border-radius: 5px;
+  background: var(--accent); color: #fff; cursor: pointer;
+}
+#demo-msg { margin-top: 10px; font-size: 14px; color: var(--ink); min-height: 1.4em; }
+.ex {
+  background: var(--surface-2); border-left: 3px solid var(--accent);
+  padding: 12px 16px; margin: 16px 0; border-radius: 0 var(--r) var(--r) 0;
+  font-size: 13.5px; color: var(--ink-soft);
+}
+.ex strong { color: var(--ink); }
+.path-steps {
+  display: flex; flex-direction: column; gap: 0; margin: 8px 0 16px;
+}
+.path-step {
+  display: grid; grid-template-columns: 28px 1fr;
+  gap: 12px; align-items: start;
+}
+.path-n {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: var(--accent-dim); color: var(--accent);
+  font-family: 'DM Mono', monospace; font-size: 11px; font-weight: 500;
+  display: flex; align-items: center; justify-content: center;
+}
+.path-step p { margin: 4px 0 18px; }
+.path-line { width: 2px; background: var(--rule); margin: 0 13px; height: 8px; }
 </style>
 </head>
 <body>
@@ -499,6 +581,67 @@ mark { background: #fef08a; color: inherit; border-radius: 2px; padding: 0 1px; 
 
 <!-- SIDEBAR -->
 <div id="sidebar">
+
+  <div class="sb-section-head">Web Fundamentals</div>
+  <div class="sb-group">
+    <button class="sb-topic-btn" onclick="toggleTopic(this,'t-html')">
+      <span class="sb-icon">📄</span>
+      <span class="sb-label">HTML Basics</span>
+      <span class="sb-chev">▾</span>
+    </button>
+    <div class="sb-articles" id="t-html">
+      <a class="sb-art-link" onclick="go('web-path')">Learning Path</a>
+      <a class="sb-art-link" onclick="go('html-model')">What is HTML?</a>
+      <a class="sb-art-link" onclick="go('html-structure')">Document Structure</a>
+      <a class="sb-art-link" onclick="go('html-elements')">Elements &amp; Attributes</a>
+      <a class="sb-art-link" onclick="go('html-content')">Text, Links &amp; Images</a>
+      <a class="sb-art-link" onclick="go('html-forms')">Forms &amp; Inputs</a>
+      <a class="sb-art-link" onclick="go('html-tables')">Tables &amp; Buttons</a>
+      <a class="sb-art-link" onclick="go('html-semantic')">Containers &amp; Semantic HTML</a>
+    </div>
+  </div>
+  <div class="sb-group">
+    <button class="sb-topic-btn" onclick="toggleTopic(this,'t-css')">
+      <span class="sb-icon">🎨</span>
+      <span class="sb-label">CSS Basics</span>
+      <span class="sb-chev">▾</span>
+    </button>
+    <div class="sb-articles" id="t-css">
+      <a class="sb-art-link" onclick="go('css-intro')">What is CSS?</a>
+      <a class="sb-art-link" onclick="go('css-selectors')">Selectors</a>
+      <a class="sb-art-link" onclick="go('css-visual')">Colors, Fonts &amp; Size</a>
+      <a class="sb-art-link" onclick="go('css-box')">Box Model</a>
+      <a class="sb-art-link" onclick="go('css-display')">Display &amp; Position</a>
+      <a class="sb-art-link" onclick="go('css-flex')">Flexbox</a>
+      <a class="sb-art-link" onclick="go('css-grid')">Grid &amp; Responsive</a>
+      <a class="sb-art-link" onclick="go('css-ui5')">UI5-relevant CSS</a>
+    </div>
+  </div>
+  <div class="sb-group">
+    <button class="sb-topic-btn" onclick="toggleTopic(this,'t-js')">
+      <span class="sb-icon">⚡</span>
+      <span class="sb-label">JavaScript</span>
+      <span class="sb-chev">▾</span>
+    </button>
+    <div class="sb-articles" id="t-js">
+      <a class="sb-art-link" onclick="go('js-fundamentals')">JavaScript Fundamentals</a>
+      <a class="sb-art-link" onclick="go('js-variables')">Variables</a>
+      <a class="sb-art-link" onclick="go('js-types')">Data Types &amp; Operators</a>
+      <a class="sb-art-link" onclick="go('js-conditions')">Conditions</a>
+      <a class="sb-art-link" onclick="go('js-loops')">Loops</a>
+      <a class="sb-art-link" onclick="go('js-functions')">Functions</a>
+      <a class="sb-art-link" onclick="go('js-objects')">Objects</a>
+      <a class="sb-art-link" onclick="go('js-arrays')">Arrays</a>
+      <a class="sb-art-link" onclick="go('js-array-methods')">Array Methods</a>
+      <a class="sb-art-link" onclick="go('js-dom')">DOM Manipulation</a>
+      <a class="sb-art-link" onclick="go('js-events')">Events</a>
+      <a class="sb-art-link" onclick="go('js-json')">JSON</a>
+      <a class="sb-art-link" onclick="go('js-modern')">Modern Syntax</a>
+      <a class="sb-art-link" onclick="go('js-async')">Promises &amp; async/await</a>
+      <a class="sb-art-link" onclick="go('js-modules')">Modules &amp; Errors</a>
+      <a class="sb-art-link" onclick="go('js-to-ui5')">JavaScript → SAPUI5</a>
+    </div>
+  </div>
 
   <div class="sb-section-head">Platform</div>
   <div class="sb-group">
@@ -638,6 +781,942 @@ mark { background: #fef08a; color: inherit; border-radius: 2px; padding: 0 1px; 
 
 <!-- MAIN CONTENT -->
 <div id="main">
+
+<!-- ═══════════ WEB PATH ═══════════ -->
+<article class="article" id="web-path">
+  <div class="art-eyebrow"><span class="art-category">Web Fundamentals</span><span class="art-dot"></span><span style="font-size:11px;color:var(--ink-muted)">Start here</span></div>
+  <h1>The Path into SAPUI5</h1>
+  <p class="lead">SAPUI5 is still HTML, CSS, and JavaScript — wrapped in XML views, a control tree, and MVC. These lessons teach only the web pieces you need to read a controller, not a full frontend-engineering course.</p>
+
+  <div class="diagram">
+    <svg viewBox="0 0 680 220" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:680px;display:block;margin:0 auto;">
+      <rect x="230" y="8" width="220" height="36" rx="8" fill="#deeaf9" stroke="#0057b8" stroke-width="1.5"/>
+      <text x="340" y="31" text-anchor="middle" font-family="Fraunces,serif" font-size="13" font-weight="600" fill="#0a3060">Web Fundamentals</text>
+      <line x1="340" y1="44" x2="340" y2="62" stroke="#0057b8" stroke-width="1.4"/>
+      <line x1="120" y1="62" x2="560" y2="62" stroke="#0057b8" stroke-width="1.4"/>
+      <line x1="120" y1="62" x2="120" y2="74" stroke="#0057b8" stroke-width="1.4"/>
+      <line x1="340" y1="62" x2="340" y2="74" stroke="#0057b8" stroke-width="1.4"/>
+      <line x1="560" y1="62" x2="560" y2="74" stroke="#0057b8" stroke-width="1.4"/>
+      <rect x="50" y="74" width="140" height="42" rx="8" fill="#fff" stroke="#e2e6ed" stroke-width="1.5"/>
+      <text x="120" y="100" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="13" font-weight="600" fill="#0e1117">HTML</text>
+      <rect x="270" y="74" width="140" height="42" rx="8" fill="#fff" stroke="#e2e6ed" stroke-width="1.5"/>
+      <text x="340" y="100" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="13" font-weight="600" fill="#0e1117">CSS</text>
+      <rect x="490" y="74" width="140" height="42" rx="8" fill="#fff" stroke="#e2e6ed" stroke-width="1.5"/>
+      <text x="560" y="100" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="13" font-weight="600" fill="#0e1117">JavaScript</text>
+      <line x1="120" y1="116" x2="120" y2="132" stroke="#0057b8" stroke-width="1.4"/>
+      <line x1="340" y1="116" x2="340" y2="132" stroke="#0057b8" stroke-width="1.4"/>
+      <line x1="560" y1="116" x2="560" y2="132" stroke="#0057b8" stroke-width="1.4"/>
+      <line x1="120" y1="132" x2="560" y2="132" stroke="#0057b8" stroke-width="1.4"/>
+      <line x1="340" y1="132" x2="340" y2="146" stroke="#0057b8" stroke-width="1.4"/>
+      <rect x="245" y="146" width="190" height="56" rx="8" fill="#e0f2f0" stroke="#00897b" stroke-width="1.5"/>
+      <text x="340" y="170" text-anchor="middle" font-family="Fraunces,serif" font-size="13" font-weight="600" fill="#004d45">SAPUI5</text>
+      <text x="340" y="188" text-anchor="middle" font-family="DM Mono,monospace" font-size="10" fill="#2a7a72">XML Views · JS Controllers</text>
+    </svg>
+  </div>
+
+  <p>After this section the existing path continues: MVC → data binding → OData → routing → a full Fiori application.</p>
+
+  <table class="kb-table">
+    <tr><th>Layer</th><th>What it defines</th><th>UI5 equivalent</th></tr>
+    <tr><td>HTML</td><td>What exists on the page</td><td>XML View — what controls exist</td></tr>
+    <tr><td>CSS</td><td>How it looks and is laid out</td><td>Fiori theme + <code>class</code> / <code>sapUi*</code> spacing</td></tr>
+    <tr><td>JavaScript</td><td>What happens when the user acts</td><td>Controller event handlers</td></tr>
+  </table>
+
+  <div class="callout callout-warn"><span class="ci">⚠️</span><div>Do not try to learn “all of JavaScript.” The goal is to look at <code>onSave: function (oEvent)</code> and immediately see a function, an event, <code>this</code>, a method call, a string, and an <code>if</code>.</div></div>
+</article>
+
+<article class="article" id="html-model">
+  <div class="art-eyebrow"><span class="art-category">HTML</span><span class="art-dot"></span><span style="font-size:11px;color:var(--ink-muted)">Mental model</span></div>
+  <h1>What is HTML?</h1>
+  <p class="lead">HTML defines <strong>what exists on the page</strong> — headings, buttons, inputs, lists. It is not a programming language. It is a structure language, the same job an XML View does in SAPUI5.</p>
+
+  <div class="codeblock">
+    <div class="cb-head"><span class="cb-lang">html</span><button class="cb-copy" onclick="cp(this)">Copy</button></div>
+    <pre><span class="tag">&lt;!DOCTYPE html&gt;</span>
+<span class="tag">&lt;html&gt;</span>
+<span class="tag">&lt;head&gt;</span>
+    <span class="tag">&lt;title&gt;</span>My Page<span class="tag">&lt;/title&gt;</span>
+<span class="tag">&lt;/head&gt;</span>
+<span class="tag">&lt;body&gt;</span>
+    <span class="tag">&lt;h1&gt;</span>Hello Fiori<span class="tag">&lt;/h1&gt;</span>
+<span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span></pre>
+  </div>
+
+  <div class="pair">
+    <div>
+      <div class="pair-label">HTML</div>
+      <div class="codeblock">
+        <div class="cb-head"><span class="cb-lang">html</span></div>
+        <pre><span class="tag">&lt;button&gt;</span>Save<span class="tag">&lt;/button&gt;</span></pre>
+      </div>
+    </div>
+    <div>
+      <div class="pair-label">UI5 XML View</div>
+      <div class="codeblock">
+        <div class="cb-head"><span class="cb-lang">xml</span></div>
+        <pre><span class="tag">&lt;Button</span> <span class="prop">text</span>=<span class="str">"Save"</span> <span class="tag">/&gt;</span></pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout callout-tip"><span class="ci">💡</span><div>HTML → page structure. XML View → UI structure. Once that mapping clicks, XML Views stop looking foreign.</div></div>
+
+  <div class="ex"><strong>Exercise:</strong> Write a page with a title “Employee App” and a heading “Employee List”. Do not add CSS yet.</div>
+</article>
+
+<article class="article" id="html-structure">
+  <div class="art-eyebrow"><span class="art-category">HTML</span><span class="art-dot"></span><span style="font-size:11px;color:var(--ink-muted)">Skeleton</span></div>
+  <h1>HTML Document Structure</h1>
+  <p class="lead">Every page has the same skeleton: doctype, <code>html</code>, <code>head</code> (metadata the user does not see), and <code>body</code> (everything visible).</p>
+
+  <table class="kb-table">
+    <tr><th>Part</th><th>Role</th><th>UI5 parallel</th></tr>
+    <tr><td><code>&lt;!DOCTYPE html&gt;</code></td><td>Tells the browser this is HTML5</td><td>—</td></tr>
+    <tr><td><code>&lt;head&gt;</code></td><td>Title, fonts, bootstrap scripts</td><td><code>index.html</code> bootstraps UI5 here</td></tr>
+    <tr><td><code>&lt;body&gt;</code></td><td>Visible content</td><td>UI5 mounts the app into a body element</td></tr>
+  </table>
+
+  <div class="codeblock">
+    <div class="cb-head"><span class="cb-lang">html — typical UI5 index.html (simplified)</span><button class="cb-copy" onclick="cp(this)">Copy</button></div>
+    <pre><span class="tag">&lt;!DOCTYPE html&gt;</span>
+<span class="tag">&lt;html&gt;</span>
+<span class="tag">&lt;head&gt;</span>
+  <span class="tag">&lt;script</span> <span class="prop">id</span>=<span class="str">"sap-ui-bootstrap"</span>
+    <span class="prop">src</span>=<span class="str">"https://ui5.sap.com/resources/sap-ui-core.js"</span>
+    <span class="prop">data-sap-ui-theme</span>=<span class="str">"sap_horizon"</span>
+    <span class="prop">data-sap-ui-resourceroots</span>=<span class="str">'{"demo": "./"}'</span>
+    <span class="prop">data-sap-ui-oninit</span>=<span class="str">"module:sap/ui/core/ComponentSupport"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;/script&gt;</span>
+<span class="tag">&lt;/head&gt;</span>
+<span class="tag">&lt;body</span> <span class="prop">class</span>=<span class="str">"sapUiBody"</span> <span class="prop">id</span>=<span class="str">"content"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;div</span> <span class="prop">data-sap-ui-component</span>
+       <span class="prop">data-name</span>=<span class="str">"demo"</span>
+       <span class="prop">data-id</span>=<span class="str">"container"</span>
+       <span class="prop">data-settings</span>=<span class="str">'{"id":"demo"}'</span><span class="tag">&gt;&lt;/div&gt;</span>
+<span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span></pre>
+  </div>
+
+  <p>You rarely hand-write this after using the Application Generator — but you should recognise that the Fiori app still lives inside a normal HTML document.</p>
+</article>
+
+<article class="article" id="html-elements">
+  <div class="art-eyebrow"><span class="art-category">HTML</span><span class="art-dot"></span><span style="font-size:11px;color:var(--ink-muted)">Building blocks</span></div>
+  <h1>Elements &amp; Attributes</h1>
+  <p class="lead">An element is a tag plus its content. An attribute is extra information on the opening tag — <code>id</code>, <code>src</code>, <code>type</code>, <code>href</code>. UI5 XML uses the same idea: a control name plus properties.</p>
+
+  <div class="codeblock">
+    <div class="cb-head"><span class="cb-lang">html</span><button class="cb-copy" onclick="cp(this)">Copy</button></div>
+    <pre><span class="tag">&lt;input</span> <span class="prop">id</span>=<span class="str">"nameInput"</span> <span class="prop">type</span>=<span class="str">"text"</span> <span class="prop">placeholder</span>=<span class="str">"Name"</span><span class="tag">&gt;</span></pre>
+  </div>
+
+  <table class="kb-table">
+    <tr><th>Piece</th><th>Example</th><th>UI5</th></tr>
+    <tr><td>Element / control</td><td><code>&lt;input&gt;</code></td><td><code>&lt;Input /&gt;</code></td></tr>
+    <tr><td>Attribute / property</td><td><code>id="nameInput"</code></td><td><code>id="nameInput"</code></td></tr>
+    <tr><td>id</td><td>Find it in JS: <code>getElementById</code></td><td>Find it in the controller: <code>this.byId("nameInput")</code></td></tr>
+  </table>
+
+  <div class="callout callout-note"><span class="ci">ℹ️</span><div>Self-closing tags (<code>&lt;img&gt;</code>, <code>&lt;input&gt;</code>, <code>&lt;Button /&gt;</code>) have no inner text. Most UI5 controls are written this way when they have no children.</div></div>
+
+  <div class="ex"><strong>Exercise:</strong> Write an input with <code>id="city"</code> and <code>type="text"</code>. Then write the UI5 equivalent: <code>&lt;Input id="city" /&gt;</code>.</div>
+</article>
+
+<article class="article" id="html-content">
+  <div class="art-eyebrow"><span class="art-category">HTML</span><span class="art-dot"></span><span style="font-size:11px;color:var(--ink-muted)">Common tags</span></div>
+  <h1>Headings, Paragraphs, Lists, Links &amp; Images</h1>
+  <p class="lead">Learn this small set first. They cover most static content you will ever write by hand — and they map cleanly onto <code>Title</code>, <code>Text</code>, <code>List</code>, <code>Link</code>, and <code>Image</code> in <code>sap.m</code>.</p>
+
+  <div class="codeblock">
+    <div class="cb-head"><span class="cb-lang">html</span><button class="cb-copy" onclick="cp(this)">Copy</button></div>
+    <pre><span class="tag">&lt;h1&gt;</span>Heading<span class="tag">&lt;/h1&gt;</span>
+<span class="tag">&lt;p&gt;</span>Paragraph<span class="tag">&lt;/p&gt;</span>
+<span class="tag">&lt;ul&gt;</span>
+  <span class="tag">&lt;li&gt;</span>John<span class="tag">&lt;/li&gt;</span>
+  <span class="tag">&lt;li&gt;</span>Smith<span class="tag">&lt;/li&gt;</span>
+<span class="tag">&lt;/ul&gt;</span>
+<span class="tag">&lt;a</span> <span class="prop">href</span>=<span class="str">"#"</span><span class="tag">&gt;</span>Link<span class="tag">&lt;/a&gt;</span>
+<span class="tag">&lt;img</span> <span class="prop">src</span>=<span class="str">"photo.jpg"</span> <span class="prop">alt</span>=<span class="str">"Employee photo"</span><span class="tag">&gt;</span></pre>
+  </div>
+
+  <table class="kb-table">
+    <tr><th>HTML</th><th>Typical UI5 control</th></tr>
+    <tr><td><code>&lt;h1&gt;</code>–<code>&lt;h6&gt;</code></td><td><code>Title</code>, page title, <code>ObjectHeader</code></td></tr>
+    <tr><td><code>&lt;p&gt;</code></td><td><code>Text</code>, <code>FormattedText</code></td></tr>
+    <tr><td><code>&lt;ul&gt;</code> / <code>&lt;li&gt;</code></td><td><code>List</code> + <code>StandardListItem</code></td></tr>
+    <tr><td><code>&lt;a href&gt;</code></td><td><code>Link</code>, or routing via <code>navTo</code></td></tr>
+    <tr><td><code>&lt;img&gt;</code></td><td><code>Image</code>, <code>Avatar</code></td></tr>
+  </table>
+</article>
+
+<article class="article" id="html-forms">
+  <div class="art-eyebrow"><span class="art-category">HTML</span><span class="art-dot"></span><span style="font-size:11px;color:var(--ink-muted)">User input</span></div>
+  <h1>Forms &amp; Inputs</h1>
+  <p class="lead">Forms collect data. In Fiori you will use <code>Input</code>, <code>ComboBox</code>, <code>Select</code>, <code>DatePicker</code>, and <code>CheckBox</code> instead of raw HTML — but the idea is identical: a field has a type, a value, and an identity.</p>
+
+  <div class="codeblock">
+    <div class="cb-head"><span class="cb-lang">html</span><button class="cb-copy" onclick="cp(this)">Copy</button></div>
+    <pre><span class="tag">&lt;input</span> <span class="prop">type</span>=<span class="str">"text"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;input</span> <span class="prop">type</span>=<span class="str">"number"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;input</span> <span class="prop">type</span>=<span class="str">"email"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;select&gt;</span>
+  <span class="tag">&lt;option&gt;</span>India<span class="tag">&lt;/option&gt;</span>
+  <span class="tag">&lt;option&gt;</span>Germany<span class="tag">&lt;/option&gt;</span>
+<span class="tag">&lt;/select&gt;</span>
+<span class="tag">&lt;button&gt;</span>Submit<span class="tag">&lt;/button&gt;</span></pre>
+  </div>
+
+  <div class="try">
+    <div class="try-head">Try it — this is a real HTML form, not UI5</div>
+    <form class="demo-form" onsubmit="event.preventDefault(); document.getElementById('form-out').textContent = 'Submitted: ' + document.getElementById('demo-name').value;">
+      <input id="demo-name" type="text" placeholder="Name">
+      <select>
+        <option>India</option>
+        <option>Germany</option>
+      </select>
+      <button type="submit">Submit</button>
+    </form>
+    <p id="form-out" style="margin:10px 0 0;font-size:13.5px;color:var(--ink-soft);"></p>
+  </div>
+
+  <div class="callout callout-tip"><span class="ci">💡</span><div>In UI5 you almost never read <code>input.value</code> from the DOM. You call <code>oInput.getValue()</code> on the control, or better: bind the value to a model.</div></div>
+</article>
+
+<article class="article" id="html-tables">
+  <div class="art-eyebrow"><span class="art-category">HTML</span><span class="art-dot"></span><span style="font-size:11px;color:var(--ink-muted)">Tabular data</span></div>
+  <h1>Tables &amp; Buttons</h1>
+  <p class="lead">HTML tables are rows of cells. Fiori tables are the same idea with binding: columns declared once, rows generated from a model. Buttons trigger actions — in HTML via click listeners, in UI5 via <code>press=".onSave"</code>.</p>
+
+  <div class="pair">
+    <div>
+      <div class="pair-label">HTML table</div>
+      <div class="codeblock">
+        <div class="cb-head"><span class="cb-lang">html</span><button class="cb-copy" onclick="cp(this)">Copy</button></div>
+        <pre><span class="tag">&lt;table&gt;</span>
+  <span class="tag">&lt;tr&gt;</span>
+    <span class="tag">&lt;th&gt;</span>Name<span class="tag">&lt;/th&gt;</span>
+    <span class="tag">&lt;th&gt;</span>City<span class="tag">&lt;/th&gt;</span>
+  <span class="tag">&lt;/tr&gt;</span>
+  <span class="tag">&lt;tr&gt;</span>
+    <span class="tag">&lt;td&gt;</span>John<span class="tag">&lt;/td&gt;</span>
+    <span class="tag">&lt;td&gt;</span>London<span class="tag">&lt;/td&gt;</span>
+  <span class="tag">&lt;/tr&gt;</span>
+<span class="tag">&lt;/table&gt;</span></pre>
+      </div>
+    </div>
+    <div>
+      <div class="pair-label">UI5 table (idea)</div>
+      <div class="codeblock">
+        <div class="cb-head"><span class="cb-lang">xml</span><button class="cb-copy" onclick="cp(this)">Copy</button></div>
+        <pre><span class="tag">&lt;Table</span> <span class="prop">items</span>=<span class="str">"{/Employees}"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;columns&gt;</span>…<span class="tag">&lt;/columns&gt;</span>
+  <span class="tag">&lt;items&gt;</span>
+    <span class="tag">&lt;ColumnListItem&gt;</span>
+      <span class="tag">&lt;Text</span> <span class="prop">text</span>=<span class="str">"{FirstName}"</span> <span class="tag">/&gt;</span>
+    <span class="tag">&lt;/ColumnListItem&gt;</span>
+  <span class="tag">&lt;/items&gt;</span>
+<span class="tag">&lt;/Table&gt;</span></pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="codeblock">
+    <div class="cb-head"><span class="cb-lang">html</span></div>
+    <pre><span class="tag">&lt;button&gt;</span>Save<span class="tag">&lt;/button&gt;</span></pre>
+  </div>
+  <p>A button without JavaScript does nothing useful. The Events lesson shows how a click becomes <code>onSave</code> in a controller.</p>
+</article>
+
+<article class="article" id="html-semantic">
+  <div class="art-eyebrow"><span class="art-category">HTML</span><span class="art-dot"></span><span style="font-size:11px;color:var(--ink-muted)">Structure</span></div>
+  <h1>div, span &amp; Semantic HTML</h1>
+  <p class="lead"><code>div</code> is a block container. <code>span</code> is an inline wrapper. Semantic tags (<code>header</code>, <code>main</code>, <code>nav</code>, <code>section</code>) describe meaning. In UI5, <code>Page</code>, <code>Panel</code>, <code>VBox</code>, and <code>HBox</code> play this role — you almost never drop raw <code>div</code>s into a Fiori view.</p>
+
+  <div class="codeblock">
+    <div class="cb-head"><span class="cb-lang">html</span><button class="cb-copy" onclick="cp(this)">Copy</button></div>
+    <pre><span class="tag">&lt;div&gt;</span>Container (block)<span class="tag">&lt;/div&gt;</span>
+<span class="tag">&lt;span&gt;</span>Inline text<span class="tag">&lt;/span&gt;</span>
+
+<span class="tag">&lt;header&gt;</span>App header<span class="tag">&lt;/header&gt;</span>
+<span class="tag">&lt;main&gt;</span>Primary content<span class="tag">&lt;/main&gt;</span>
+<span class="tag">&lt;nav&gt;</span>Navigation<span class="tag">&lt;/nav&gt;</span></pre>
+  </div>
+
+  <table class="kb-table">
+    <tr><th>HTML habit</th><th>UI5 habit</th></tr>
+    <tr><td>Nest <code>div</code>s for layout</td><td>Use <code>VBox</code> / <code>HBox</code> / <code>FlexBox</code></td></tr>
+    <tr><td><code>span</code> for a label fragment</td><td><code>Label</code> + <code>Text</code></td></tr>
+    <tr><td><code>&lt;header&gt;</code> / <code>&lt;main&gt;</code></td><td><code>Page</code> with <code>headerContent</code> and content aggregation</td></tr>
+  </table>
+</article>
+
+<article class="article" id="css-intro">
+  <div class="art-eyebrow"><span class="art-category">CSS</span><span class="art-dot"></span><span style="font-size:11px;color:var(--ink-muted)">Mental model</span></div>
+  <h1>What is CSS?</h1>
+  <p class="lead">CSS defines <strong>how it looks</strong>. HTML says “there is a button.” CSS says how large, how spaced, what colour. In Fiori, SAP’s theme does most of this. You still need CSS literacy to debug layout and to apply the official spacing classes.</p>
+
+  <div class="codeblock">
+    <div class="cb-head"><span class="cb-lang">css</span><button class="cb-copy" onclick="cp(this)">Copy</button></div>
+    <pre><span class="fn">.card</span> {
+    <span class="prop">background-color</span>: lightgray;
+    <span class="prop">color</span>: black;
+    <span class="prop">font-size</span>: <span class="num">20px</span>;
+    <span class="prop">text-align</span>: center;
+}</pre>
+  </div>
+
+  <div class="callout callout-warn"><span class="ci">⚠️</span><div>Do not restyle Fiori controls to look like a custom website. Follow the theme. Custom CSS is for spacing, rare layout fixes, and your own non-control wrappers — not for reinventing <code>sap.m.Button</code>.</div></div>
+</article>
+
+<article class="article" id="css-selectors">
+  <div class="art-eyebrow"><span class="art-category">CSS</span><span class="art-dot"></span><span style="font-size:11px;color:var(--ink-muted)">Targeting</span></div>
+  <h1>Selectors</h1>
+  <p class="lead">A selector answers “which elements get these rules?” Element, class, and id cover almost everything you need. UI5 exposes <code>class</code> on controls for this reason.</p>
+
+  <table class="kb-table">
+    <tr><th>Selector</th><th>Matches</th><th>Example</th></tr>
+    <tr><td><code>button</code></td><td>All button elements</td><td>Rare in UI5 — too broad</td></tr>
+    <tr><td><code>.card</code></td><td>class="card"</td><td>Preferred</td></tr>
+    <tr><td><code>#nameInput</code></td><td>id="nameInput"</td><td>Avoid styling by id in Fiori apps</td></tr>
+  </table>
+
+  <div class="codeblock">
+    <div class="cb-head"><span class="cb-lang">xml</span><button class="cb-copy" onclick="cp(this)">Copy</button></div>
+    <pre><span class="tag">&lt;VBox</span> <span class="prop">class</span>=<span class="str">"sapUiSmallMargin"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;Text</span> <span class="prop">text</span>=<span class="str">"Padded by a Fiori CSS class"</span> <span class="tag">/&gt;</span>
+<span class="tag">&lt;/VBox&gt;</span></pre>
+  </div>
+</article>
+
+<article class="article" id="css-visual">
+  <div class="art-eyebrow"><span class="art-category">CSS</span><span class="art-dot"></span><span style="font-size:11px;color:var(--ink-muted)">Appearance</span></div>
+  <h1>Colors, Fonts, Width &amp; Height</h1>
+  <p class="lead">Colour, type, and size are the first properties people reach for. In UI5, theme parameters already define brand colours and typography — override them only when you have a reason.</p>
+
+  <div class="codeblock">
+    <div class="cb-head"><span class="cb-lang">css</span><button class="cb-copy" onclick="cp(this)">Copy</button></div>
+    <pre><span class="fn">.card</span> {
+    <span class="prop">width</span>: <span class="num">300px</span>;
+    <span class="prop">height</span>: <span class="num">auto</span>;
+    <span class="prop">background-color</span>: lightgray;
+    <span class="prop">color</span>: black;
+    <span class="prop">font-size</span>: <span class="num">20px</span>;
+    <span class="prop">text-align</span>: center;
+}</pre>
+  </div>
+
+  <p><code>width</code> and <code>height</code> describe the <strong>content box</strong> by default. The next lesson shows why a “300px card” can occupy more than 300px on screen.</p>
+</article>
+
+<article class="article" id="css-box">
+  <div class="art-eyebrow"><span class="art-category">CSS</span><span class="art-dot"></span><span style="font-size:11px;color:var(--ink-muted)">The confusing part</span></div>
+  <h1>The Box Model</h1>
+  <p class="lead">Every element is a rectangle made of content, padding, border, and margin. Layout bugs in Fiori custom CSS are almost always a box-model misunderstanding.</p>
+
+  <div class="diagram">
+    <div class="bm bm-margin">
+      <div class="bm-cap">margin · 30px</div>
+      <div class="bm-border">
+        <div class="bm-cap" style="padding:8px 8px 0;color:#7a4000;">border · 1px</div>
+        <div class="bm-padding">
+          <div class="bm-cap" style="color:#004d45;">padding · 20px</div>
+          <div class="bm-content">content · width 300px</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="codeblock">
+    <div class="cb-head"><span class="cb-lang">css</span><button class="cb-copy" onclick="cp(this)">Copy</button></div>
+    <pre><span class="fn">.card</span> {
+    <span class="prop">width</span>: <span class="num">300px</span>;
+    <span class="prop">padding</span>: <span class="num">20px</span>;
+    <span class="prop">border</span>: <span class="num">1px</span> solid black;
+    <span class="prop">margin</span>: <span class="num">30px</span>;
+}</pre>
+  </div>
+
+  <table class="kb-table">
+    <tr><th>Layer</th><th>What it is</th></tr>
+    <tr><td>Content</td><td>The text or child controls</td></tr>
+    <tr><td>Padding</td><td>Space inside the border</td></tr>
+    <tr><td>Border</td><td>The visible edge</td></tr>
+    <tr><td>Margin</td><td>Space outside, pushing neighbours away</td></tr>
+  </table>
+
+  <div class="callout callout-note"><span class="ci">ℹ️</span><div>Fiori spacing classes such as <code>sapUiSmallMargin</code> and <code>sapUiTinyMarginBegin</code> are just pre-defined margins. They exist so you do not invent your own 13px gaps.</div></div>
+</article>
+
+<article class="article" id="css-display">
+  <div class="art-eyebrow"><span class="art-category">CSS</span><span class="art-dot"></span><span style="font-size:11px;color:var(--ink-muted)">Flow</span></div>
+  <h1>Display &amp; Position</h1>
+  <p class="lead"><code>display</code> controls how a box participates in layout. <code>position</code> pulls a box out of normal flow. You need enough of both to debug “why is this control sitting on top of the table?”</p>
+
+  <table class="kb-table">
+    <tr><th>Value</th><th>Behaviour</th><th>UI5 analogue</th></tr>
+    <tr><td><code>block</code></td><td>Full width, stacks vertically</td><td><code>VBox</code> children</td></tr>
+    <tr><td><code>inline</code></td><td>Sits in the text flow</td><td>Rare for controls</td></tr>
+    <tr><td><code>flex</code></td><td>Row or column with alignment</td><td><code>HBox</code> / <code>VBox</code> / <code>FlexBox</code></td></tr>
+    <tr><td><code>grid</code></td><td>Two-dimensional tracks</td><td><code>CSSGrid</code> / <code>sap.ui.layout.Grid</code></td></tr>
+    <tr><td><code>position: absolute</code></td><td>Offset from a positioned ancestor</td><td>Avoid unless you know the containing block</td></tr>
+  </table>
+</article>
+
+<article class="article" id="css-flex">
+  <div class="art-eyebrow"><span class="art-category">CSS</span><span class="art-dot"></span><span style="font-size:11px;color:var(--ink-muted)">Mandatory</span></div>
+  <h1>Flexbox</h1>
+  <p class="lead">Flexbox is the layout mental model behind <code>HBox</code> and <code>VBox</code>. Horizontal alignment, vertical alignment, and spacing stop being mysterious once you can read <code>justify-content</code> and <code>align-items</code>.</p>
+
+  <div class="codeblock">
+    <div class="cb-head"><span class="cb-lang">html + css</span><button class="cb-copy" onclick="cp(this)">Copy</button></div>
+    <pre><span class="tag">&lt;div</span> <span class="prop">class</span>=<span class="str">"container"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;div&gt;</span>One<span class="tag">&lt;/div&gt;</span>
+    <span class="tag">&lt;div&gt;</span>Two<span class="tag">&lt;/div&gt;</span>
+    <span class="tag">&lt;div&gt;</span>Three<span class="tag">&lt;/div&gt;</span>
+<span class="tag">&lt;/div&gt;</span>
+
+<span class="fn">.container</span> {
+    <span class="prop">display</span>: flex;
+    <span class="prop">justify-content</span>: space-between;
+    <span class="prop">align-items</span>: center;
+}</pre>
+  </div>
+
+  <div class="try">
+    <div class="try-head">Try it — change justify-content</div>
+    <div class="flex-stage" id="flex-stage">
+      <div>One</div><div>Two</div><div>Three</div>
+    </div>
+    <div class="try-btns">
+      <button class="on" onclick="setFlex(this,'flex-start')">flex-start</button>
+      <button onclick="setFlex(this,'center')">center</button>
+      <button onclick="setFlex(this,'space-between')">space-between</button>
+      <button onclick="setFlex(this,'space-around')">space-around</button>
+    </div>
+  </div>
+
+  <table class="kb-table">
+    <tr><th>CSS</th><th>HBox / VBox</th></tr>
+    <tr><td><code>justify-content</code> (main axis)</td><td><code>justifyContent="SpaceBetween"</code></td></tr>
+    <tr><td><code>align-items</code> (cross axis)</td><td><code>alignItems="Center"</code></td></tr>
+    <tr><td><code>flex-direction: row</code></td><td><code>HBox</code></td></tr>
+    <tr><td><code>flex-direction: column</code></td><td><code>VBox</code></td></tr>
+  </table>
+</article>
+
+<article class="article" id="css-grid">
+  <div class="art-eyebrow"><span class="art-category">CSS</span><span class="art-dot"></span><span style="font-size:11px;color:var(--ink-muted)">Two axes</span></div>
+  <h1>CSS Grid &amp; Responsive Design</h1>
+  <p class="lead">Grid places items on rows <em>and</em> columns. Media queries change rules at a breakpoint. Fiori already ships responsive tables and a form grid — learn the idea so those controls feel less like magic.</p>
+
+  <div class="codeblock">
+    <div class="cb-head"><span class="cb-lang">css</span><button class="cb-copy" onclick="cp(this)">Copy</button></div>
+    <pre><span class="fn">.layout</span> {
+    <span class="prop">display</span>: grid;
+    <span class="prop">grid-template-columns</span>: <span class="num">1fr</span> <span class="num">1fr</span>;
+    <span class="prop">gap</span>: <span class="num">16px</span>;
+}
+
+<span class="kw">@media</span> (max-width: <span class="num">600px</span>) {
+    <span class="fn">.layout</span> { <span class="prop">grid-template-columns</span>: <span class="num">1fr</span>; }
+}</pre>
+  </div>
+
+  <p>On a phone, two columns become one. That is the same instinct as <code>sap.ui.layout.form.SimpleForm</code> switching from two columns to one, or a <code>ResponsiveTable</code> collapsing columns.</p>
+</article>
+
+<article class="article" id="css-ui5">
+  <div class="art-eyebrow"><span class="art-category">CSS</span><span class="art-dot"></span><span style="font-size:11px;color:var(--ink-muted)">Fiori conventions</span></div>
+  <h1>UI5-relevant CSS</h1>
+  <p class="lead">Use the theme and SAP’s helper classes first. Custom CSS is a last resort, scoped tightly, never fighting the Horizon theme.</p>
+
+  <table class="kb-table">
+    <tr><th>Class</th><th>Use</th></tr>
+    <tr><td><code>sapUiTinyMargin</code> / <code>Small</code> / <code>Medium</code> / <code>Large</code></td><td>All-side margin</td></tr>
+    <tr><td><code>sapUiSmallMarginBegin</code> / <code>End</code> / <code>Top</code> / <code>Bottom</code></td><td>One-side margin (RTL-safe Begin/End)</td></tr>
+    <tr><td><code>sapUiContentPadding</code></td><td>Standard content padding</td></tr>
+    <tr><td><code>sapUiHideOnPhone</code> / <code>sapUiVisibleOnlyOnDesktop</code></td><td>Responsive visibility</td></tr>
+    <tr><td><code>sapUiBody</code></td><td>On <code>&lt;body&gt;</code> in index.html</td></tr>
+  </table>
+
+  <div class="codeblock">
+    <div class="cb-head"><span class="cb-lang">xml</span><button class="cb-copy" onclick="cp(this)">Copy</button></div>
+    <pre><span class="tag">&lt;HBox</span> <span class="prop">justifyContent</span>=<span class="str">"SpaceBetween"</span>
+      <span class="prop">alignItems</span>=<span class="str">"Center"</span>
+      <span class="prop">class</span>=<span class="str">"sapUiSmallMargin"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;Title</span> <span class="prop">text</span>=<span class="str">"Employees"</span> <span class="tag">/&gt;</span>
+  <span class="tag">&lt;Button</span> <span class="prop">text</span>=<span class="str">"Create"</span> <span class="prop">press</span>=<span class="str">".onCreate"</span> <span class="tag">/&gt;</span>
+<span class="tag">&lt;/HBox&gt;</span></pre>
+  </div>
+
+  <div class="callout callout-danger"><span class="ci">🚫</span><div>Do not select inner UI5 DOM with brittle selectors like <code>.sapMBtnInner</code>. That HTML is generated and can change between UI5 versions. Style via control properties and official classes.</div></div>
+</article>
+
+<article class="article" id="js-fundamentals">
+  <div class="art-eyebrow"><span class="art-category">JavaScript</span><span class="art-dot"></span><span style="font-size:11px;color:var(--ink-muted)">Level 1</span></div>
+  <h1>JavaScript Fundamentals</h1>
+  <p class="lead">JavaScript is the language of every SAPUI5 controller. You do not need a frontend-engineering course. You need to recognise functions, objects, methods, events, and <code>this</code> when you read code like this:</p>
+
+  <div class="codeblock">
+    <div class="cb-head"><span class="cb-lang">javascript — the target</span><button class="cb-copy" onclick="cp(this)">Copy</button></div>
+    <pre>onSave: <span class="kw">function</span> (oEvent) {
+    <span class="kw">var</span> oInput = <span class="kw">this</span>.<span class="fn">byId</span>(<span class="str">"nameInput"</span>);
+    <span class="kw">var</span> sName = oInput.<span class="fn">getValue</span>();
+
+    <span class="kw">if</span> (sName) {
+        MessageToast.<span class="fn">show</span>(<span class="str">"Hello "</span> + sName);
+    }
+}</pre>
+  </div>
+
+  <p>By the last lesson you should be able to name every piece of that snippet. Open the browser console (F12 → Console) and run <code>console.log("Hello")</code> — that is your scratchpad for the next lessons.</p>
+</article>
+
+<article class="article" id="js-variables">
+  <div class="art-eyebrow"><span class="art-category">JavaScript</span><span class="art-dot"></span><span style="font-size:11px;color:var(--ink-muted)">Syntax</span></div>
+  <h1>Variables</h1>
+  <p class="lead">A variable is a named box. SAPUI5 controllers still contain a lot of <code>var</code>. New code should prefer <code>const</code> and <code>let</code>.</p>
+
+  <div class="codeblock">
+    <div class="cb-head"><span class="cb-lang">javascript</span><button class="cb-copy" onclick="cp(this)">Copy</button></div>
+    <pre><span class="kw">var</span> name = <span class="str">"Praveen"</span>;
+<span class="kw">var</span> age = <span class="num">30</span>;
+console.<span class="fn">log</span>(name);
+
+<span class="kw">let</span> city = <span class="str">"Delhi"</span>;       <span class="cmt">// can be reassigned</span>
+<span class="kw">const</span> company = <span class="str">"SAP"</span>;    <span class="cmt">// cannot be reassigned</span></pre>
+  </div>
+
+  <table class="kb-table">
+    <tr><th>Keyword</th><th>Reassign?</th><th>When to use</th></tr>
+    <tr><td><code>var</code></td><td>Yes (function scoped)</td><td>Reading older UI5 samples</td></tr>
+    <tr><td><code>let</code></td><td>Yes</td><td>Values that change</td></tr>
+    <tr><td><code>const</code></td><td>No</td><td>Default for new code</td></tr>
+  </table>
+
+  <div class="callout callout-note"><span class="ci">ℹ️</span><div>Hungarian notation in UI5: <code>sName</code> string, <code>oInput</code> object, <code>aItems</code> array, <code>bValid</code> boolean, <code>iCount</code> integer, <code>fnCallback</code> function. You will see it everywhere.</div></div>
+</article>
+
+<article class="article" id="js-types">
+  <div class="art-eyebrow"><span class="art-category">JavaScript</span><span class="art-dot"></span><span style="font-size:11px;color:var(--ink-muted)">Data</span></div>
+  <h1>Data Types &amp; Operators</h1>
+  <p class="lead">Controllers pass strings, numbers, booleans, objects, and arrays. <code>typeof</code> and a few operators cover most conditions you will write.</p>
+
+  <div class="codeblock">
+    <div class="cb-head"><span class="cb-lang">javascript</span><button class="cb-copy" onclick="cp(this)">Copy</button></div>
+    <pre><span class="kw">var</span> name = <span class="str">"John"</span>;      <span class="cmt">// String</span>
+<span class="kw">var</span> age = <span class="num">25</span>;            <span class="cmt">// Number</span>
+<span class="kw">var</span> active = <span class="kw">true</span>;       <span class="cmt">// Boolean</span>
+<span class="kw">var</span> value = <span class="kw">null</span>;        <span class="cmt">// Null — intentionally empty</span>
+<span class="kw">var</span> x;                   <span class="cmt">// Undefined — not set yet</span>
+
+typeof name;             <span class="cmt">// "string"</span>
+<span class="num">10</span> + <span class="num">20</span>;                 <span class="cmt">// 30</span>
+<span class="str">"Hello "</span> + name;         <span class="cmt">// "Hello John"</span>
+age &gt;= <span class="num">18</span>;               <span class="cmt">// true</span>
+<span class="str">"5"</span> === <span class="num">5</span>;               <span class="cmt">// false — always prefer ===</span></pre>
+  </div>
+
+  <div class="callout callout-warn"><span class="ci">⚠️</span><div>Use <code>===</code> not <code>==</code>. UI5 code reviews will flag loose equality. <code>==</code> coerces types and hides bugs.</div></div>
+</article>
+
+<article class="article" id="js-conditions">
+  <div class="art-eyebrow"><span class="art-category">JavaScript</span><span class="art-dot"></span><span style="font-size:11px;color:var(--ink-muted)">Decisions</span></div>
+  <h1>Conditions</h1>
+  <p class="lead">An <code>if</code> runs code only when a test is true. Empty strings, <code>0</code>, <code>null</code>, and <code>undefined</code> are all falsy — which is why <code>if (sName)</code> is a common “did the user type something?” check.</p>
+
+  <div class="pair">
+    <div>
+      <div class="pair-label">Plain JavaScript</div>
+      <div class="codeblock">
+        <div class="cb-head"><span class="cb-lang">javascript</span><button class="cb-copy" onclick="cp(this)">Copy</button></div>
+        <pre><span class="kw">var</span> age = <span class="num">25</span>;
+<span class="kw">if</span> (age &gt;= <span class="num">18</span>) {
+    console.<span class="fn">log</span>(<span class="str">"Adult"</span>);
+} <span class="kw">else</span> {
+    console.<span class="fn">log</span>(<span class="str">"Minor"</span>);
+}</pre>
+      </div>
+    </div>
+    <div>
+      <div class="pair-label">UI5 controller</div>
+      <div class="codeblock">
+        <div class="cb-head"><span class="cb-lang">javascript</span><button class="cb-copy" onclick="cp(this)">Copy</button></div>
+        <pre><span class="kw">if</span> (sName) {
+    MessageToast.<span class="fn">show</span>(<span class="str">"Name entered"</span>);
+} <span class="kw">else</span> {
+    MessageToast.<span class="fn">show</span>(<span class="str">"Please enter a name"</span>);
+}</pre>
+      </div>
+    </div>
+  </div>
+</article>
+
+<article class="article" id="js-loops">
+  <div class="art-eyebrow"><span class="art-category">JavaScript</span><span class="art-dot"></span><span style="font-size:11px;color:var(--ink-muted)">Repetition</span></div>
+  <h1>Loops</h1>
+  <p class="lead">Loops walk lists. In UI5 you more often use <code>forEach</code> / <code>map</code> / <code>filter</code> on JSON model data than a raw <code>for</code> — but you must still be able to read both.</p>
+
+  <div class="codeblock">
+    <div class="cb-head"><span class="cb-lang">javascript</span><button class="cb-copy" onclick="cp(this)">Copy</button></div>
+    <pre><span class="kw">var</span> cities = [<span class="str">"Delhi"</span>, <span class="str">"London"</span>, <span class="str">"Berlin"</span>];
+
+<span class="kw">for</span> (<span class="kw">var</span> i = <span class="num">0</span>; i &lt; cities.length; i++) {
+    console.<span class="fn">log</span>(cities[i]);
+}
+
+<span class="kw">for</span> (<span class="kw">var</span> sCity <span class="kw">of</span> cities) {
+    console.<span class="fn">log</span>(sCity);
+}</pre>
+  </div>
+</article>
+
+<article class="article" id="js-functions">
+  <div class="art-eyebrow"><span class="art-category">JavaScript</span><span class="art-dot"></span><span style="font-size:11px;color:var(--ink-muted)">Critical</span></div>
+  <h1>Functions</h1>
+  <p class="lead">A function is a named (or anonymous) block you can call. Every <code>onInit</code>, <code>onSave</code>, and <code>onNavBack</code> is a function stored as a property on the controller object. Learn <code>function</code> first. Arrow functions come later.</p>
+
+  <div class="codeblock">
+    <div class="cb-head"><span class="cb-lang">javascript</span><button class="cb-copy" onclick="cp(this)">Copy</button></div>
+    <pre><span class="kw">function</span> <span class="fn">add</span>(a, b) {
+    <span class="kw">return</span> a + b;
+}
+<span class="kw">var</span> result = <span class="fn">add</span>(<span class="num">10</span>, <span class="num">20</span>);   <span class="cmt">// 30</span>
+
+<span class="kw">function</span> <span class="fn">sayHello</span>(name) {
+    console.<span class="fn">log</span>(<span class="str">"Hello "</span> + name);
+}
+<span class="fn">sayHello</span>(<span class="str">"Praveen"</span>);</pre>
+  </div>
+
+  <p>Parameters receive values. <code>return</code> sends a value back. If there is no <code>return</code>, the function returns <code>undefined</code>.</p>
+
+  <h2>Then modern syntax</h2>
+  <div class="codeblock">
+    <div class="cb-head"><span class="cb-lang">javascript</span><button class="cb-copy" onclick="cp(this)">Copy</button></div>
+    <pre><span class="kw">const</span> add = (a, b) =&gt; {
+    <span class="kw">return</span> a + b;
+};
+<span class="kw">const</span> addShort = (a, b) =&gt; a + b;</pre>
+  </div>
+
+  <div class="callout callout-warn"><span class="ci">⚠️</span><div>Arrow functions do not bind their own <code>this</code>. That is why UI5 controller methods are still usually written as <code>onSave: function () { this.byId(...) }</code>, not as arrows, unless you already understand <code>this</code>.</div></div>
+</article>
+
+<article class="article" id="js-objects">
+  <div class="art-eyebrow"><span class="art-category">JavaScript</span><span class="art-dot"></span><span style="font-size:11px;color:var(--ink-muted)">Critical for UI5</span></div>
+  <h1>Objects</h1>
+  <p class="lead">An object is a bag of named properties. A method is a function stored as a property. <code>this.byId()</code> only makes sense once you see that <code>this</code> is an object and <code>byId</code> is a method on it.</p>
+
+  <div class="codeblock">
+    <div class="cb-head"><span class="cb-lang">javascript</span><button class="cb-copy" onclick="cp(this)">Copy</button></div>
+    <pre><span class="kw">var</span> employee = {
+    name: <span class="str">"John"</span>,
+    age: <span class="num">30</span>,
+    department: <span class="str">"IT"</span>
+};
+
+console.<span class="fn">log</span>(employee.name);
+employee.age = <span class="num">31</span>;
+employee.city = <span class="str">"Delhi"</span>;
+
+employee.getDetails = <span class="kw">function</span> () {
+    <span class="kw">return</span> <span class="kw">this</span>.name + <span class="str">" - "</span> + <span class="kw">this</span>.department;
+};
+employee.<span class="fn">getDetails</span>();</pre>
+  </div>
+
+  <div class="callout callout-tip"><span class="ci">💡</span><div><code>this.getView()</code> is the same pattern: call the <code>getView</code> method on the current controller object. That is one of the biggest conceptual hurdles for junior UI5 developers.</div></div>
+
+  <div class="ex"><strong>Exercise:</strong> Create an object <code>product</code> with <code>name</code> and <code>price</code>. Add a method <code>describe</code> that returns both. Call it.</div>
+</article>
+
+<article class="article" id="js-arrays">
+  <div class="art-eyebrow"><span class="art-category">JavaScript</span><span class="art-dot"></span><span style="font-size:11px;color:var(--ink-muted)">Lists</span></div>
+  <h1>Arrays</h1>
+  <p class="lead">An array is an ordered list. JSON models in UI5 are usually arrays of objects — exactly the shape of an OData entity set in memory.</p>
+
+  <div class="codeblock">
+    <div class="cb-head"><span class="cb-lang">javascript</span><button class="cb-copy" onclick="cp(this)">Copy</button></div>
+    <pre><span class="kw">var</span> employees = [<span class="str">"John"</span>, <span class="str">"Smith"</span>, <span class="str">"David"</span>];
+employees[<span class="num">0</span>];   <span class="cmt">// "John"</span>
+
+<span class="kw">var</span> rows = [
+    { name: <span class="str">"John"</span>,  age: <span class="num">30</span> },
+    { name: <span class="str">"Smith"</span>, age: <span class="num">25</span> }
+];
+rows[<span class="num">0</span>].name;   <span class="cmt">// "John"</span></pre>
+  </div>
+</article>
+
+<article class="article" id="js-array-methods">
+  <div class="art-eyebrow"><span class="art-category">JavaScript</span><span class="art-dot"></span><span style="font-size:11px;color:var(--ink-muted)">JSON model data</span></div>
+  <h1>Array Methods</h1>
+  <p class="lead"><code>forEach</code>, <code>map</code>, <code>filter</code>, and <code>find</code> are how you reshape model data before putting it back on a JSONModel — search boxes, status chips, “active employees only.”</p>
+
+  <div class="codeblock">
+    <div class="cb-head"><span class="cb-lang">javascript</span><button class="cb-copy" onclick="cp(this)">Copy</button></div>
+    <pre><span class="kw">var</span> employees = [
+    { name: <span class="str">"John"</span>,  active: <span class="kw">true</span> },
+    { name: <span class="str">"Smith"</span>, active: <span class="kw">false</span> }
+];
+
+<span class="kw">var</span> active = employees.<span class="fn">filter</span>(<span class="kw">function</span> (employee) {
+    <span class="kw">return</span> employee.active === <span class="kw">true</span>;
+});
+
+<span class="kw">var</span> names = employees.<span class="fn">map</span>(<span class="kw">function</span> (e) { <span class="kw">return</span> e.name; });
+<span class="kw">var</span> john = employees.<span class="fn">find</span>(<span class="kw">function</span> (e) { <span class="kw">return</span> e.name === <span class="str">"John"</span>; });</pre>
+  </div>
+</article>
+
+<article class="article" id="js-dom">
+  <div class="art-eyebrow"><span class="art-category">JavaScript</span><span class="art-dot"></span><span style="font-size:11px;color:var(--ink-muted)">Why UI5 exists</span></div>
+  <h1>DOM Manipulation</h1>
+  <p class="lead">The DOM is the browser’s live tree of HTML. Vanilla JS finds nodes and changes them. SAPUI5 also ends up as DOM — but you talk to <strong>controls</strong>, not to <code>document.getElementById</code>.</p>
+
+  <div class="path-steps">
+    <div class="path-step"><div class="path-n">1</div><p><strong>HTML</strong> → defines structure</p></div>
+    <div class="path-step"><div class="path-n">2</div><p><strong>DOM</strong> → browser’s live tree</p></div>
+    <div class="path-step"><div class="path-n">3</div><p><strong>JavaScript</strong> → changes the tree</p></div>
+    <div class="path-step"><div class="path-n">4</div><p><strong>UI updates</strong></p></div>
+  </div>
+
+  <div class="codeblock">
+    <div class="cb-head"><span class="cb-lang">javascript</span><button class="cb-copy" onclick="cp(this)">Copy</button></div>
+    <pre><span class="kw">var</span> input = document.<span class="fn">getElementById</span>(<span class="str">"name"</span>);
+<span class="kw">var</span> button = document.<span class="fn">getElementById</span>(<span class="str">"btn"</span>);
+<span class="kw">var</span> message = document.<span class="fn">getElementById</span>(<span class="str">"message"</span>);
+
+button.<span class="fn">addEventListener</span>(<span class="str">"click"</span>, <span class="kw">function</span> () {
+    message.innerText = input.value;
+});</pre>
+  </div>
+
+  <div class="try">
+    <div class="try-head">Try it — vanilla DOM (not UI5)</div>
+    <div class="demo-form">
+      <input id="dom-name" type="text" placeholder="Name">
+      <button type="button" class="go-btn" onclick="runDomDemo()">Save</button>
+    </div>
+    <p id="demo-msg"></p>
+  </div>
+
+  <h2>The UI5 transition</h2>
+  <div class="path-steps">
+    <div class="path-step"><div class="path-n">1</div><p><strong>XML View</strong> → defines UI structure</p></div>
+    <div class="path-step"><div class="path-n">2</div><p><strong>UI5 control tree</strong> → UI5 manages the DOM</p></div>
+    <div class="path-step"><div class="path-n">3</div><p><strong>Controller</strong> → reads/writes properties and models</p></div>
+    <div class="path-step"><div class="path-n">4</div><p><strong>UI updates</strong> through binding</p></div>
+  </div>
+
+  <div class="callout callout-danger"><span class="ci">🚫</span><div>In normal web development you often manipulate the DOM directly. In SAPUI5 you normally let UI5 manage the DOM and work with controls, models, bindings, and properties instead. Reaching into <code>document.querySelector</code> from a controller is a bad habit that breaks theming, rendering, and tests.</div></div>
+</article>
+
+<article class="article" id="js-events">
+  <div class="art-eyebrow"><span class="art-category">JavaScript</span><span class="art-dot"></span><span style="font-size:11px;color:var(--ink-muted)">Why controllers look like this</span></div>
+  <h1>Events</h1>
+  <p class="lead">An event is “something happened.” Vanilla JS listens with <code>addEventListener</code>. UI5 wires the XML <code>press</code> property to a controller function. That is why controllers are full of <code>on*</code> methods.</p>
+
+  <div class="pair">
+    <div>
+      <div class="pair-label">Vanilla JS</div>
+      <div class="codeblock">
+        <div class="cb-head"><span class="cb-lang">javascript</span><button class="cb-copy" onclick="cp(this)">Copy</button></div>
+        <pre>button.<span class="fn">addEventListener</span>(<span class="str">"click"</span>, <span class="kw">function</span> () {
+    console.<span class="fn">log</span>(<span class="str">"Button clicked"</span>);
+});</pre>
+      </div>
+    </div>
+    <div>
+      <div class="pair-label">SAPUI5</div>
+      <div class="codeblock">
+        <div class="cb-head"><span class="cb-lang">xml + js</span><button class="cb-copy" onclick="cp(this)">Copy</button></div>
+        <pre><span class="tag">&lt;Button</span>
+    <span class="prop">text</span>=<span class="str">"Save"</span>
+    <span class="prop">press</span>=<span class="str">".onSave"</span> <span class="tag">/&gt;</span>
+
+onSave: <span class="kw">function</span> (oEvent) {
+    console.<span class="fn">log</span>(<span class="str">"Button clicked"</span>);
+}</pre>
+      </div>
+    </div>
+  </div>
+
+  <p><code>oEvent</code> is a parameter — an object describing the event. <code>oEvent.getSource()</code> is the control that fired it. <code>oEvent.getParameter("listItem")</code> is how list item presses pass extra data.</p>
+</article>
+
+<article class="article" id="js-json">
+  <div class="art-eyebrow"><span class="art-category">JavaScript</span><span class="art-dot"></span><span style="font-size:11px;color:var(--ink-muted)">Must-have</span></div>
+  <h1>JSON</h1>
+  <p class="lead">JSON is a text format for objects and arrays. A JSONModel is a browser-side store of that shape. If you can read JSON, the existing JSON Model article on this site becomes obvious.</p>
+
+  <div class="codeblock">
+    <div class="cb-head"><span class="cb-lang">javascript</span><button class="cb-copy" onclick="cp(this)">Copy</button></div>
+    <pre><span class="kw">var</span> employee = {
+    name: <span class="str">"John"</span>,
+    age: <span class="num">30</span>,
+    skills: [<span class="str">"JavaScript"</span>, <span class="str">"SAPUI5"</span>]
+};
+
+<span class="kw">var</span> jsonString = JSON.<span class="fn">stringify</span>(employee);
+<span class="kw">var</span> back = JSON.<span class="fn">parse</span>(jsonString);</pre>
+  </div>
+
+  <div class="codeblock">
+    <div class="cb-head"><span class="cb-lang">javascript — JSONModel</span><button class="cb-copy" onclick="cp(this)">Copy</button></div>
+    <pre><span class="kw">var</span> oModel = <span class="kw">new</span> sap.ui.model.json.<span class="fn">JSONModel</span>({
+    employee: { name: <span class="str">"John"</span>, age: <span class="num">30</span> }
+});
+<span class="kw">this</span>.<span class="fn">getView</span>().<span class="fn">setModel</span>(oModel);</pre>
+  </div>
+</article>
+
+<article class="article" id="js-modern">
+  <div class="art-eyebrow"><span class="art-category">JavaScript</span><span class="art-dot"></span><span style="font-size:11px;color:var(--ink-muted)">After the fundamentals</span></div>
+  <h1>Modern Syntax</h1>
+  <p class="lead">Learn these only after objects, arrays, and functions feel natural. You will see them in newer UI5 and CAP samples.</p>
+
+  <h2>Destructuring, spread, template literals</h2>
+  <div class="codeblock">
+    <div class="cb-head"><span class="cb-lang">javascript</span><button class="cb-copy" onclick="cp(this)">Copy</button></div>
+    <pre><span class="kw">const</span> employee = { name: <span class="str">"John"</span>, age: <span class="num">30</span> };
+<span class="kw">const</span> { name, age } = employee;
+
+<span class="kw">const</span> employee2 = { ...employee, age: <span class="num">31</span> };
+
+<span class="kw">const</span> message = <span class="str">`Hello ${name}`</span>;</pre>
+  </div>
+
+  <h2>Optional chaining &amp; nullish coalescing</h2>
+  <div class="codeblock">
+    <div class="cb-head"><span class="cb-lang">javascript</span><button class="cb-copy" onclick="cp(this)">Copy</button></div>
+    <pre>employee?.address?.city;
+<span class="kw">const</span> city = employee.city ?? <span class="str">"Unknown"</span>;</pre>
+  </div>
+</article>
+
+<article class="article" id="js-async">
+  <div class="art-eyebrow"><span class="art-category">JavaScript</span><span class="art-dot"></span><span style="font-size:11px;color:var(--ink-muted)">Real Fiori work</span></div>
+  <h1>Promises &amp; async / await</h1>
+  <p class="lead">OData calls are asynchronous — the answer arrives later. A Promise represents that later value. UI5 v2 OData still uses success/error callbacks; newer APIs and <code>fetch</code> use Promises. You need both.</p>
+
+  <div class="codeblock">
+    <div class="cb-head"><span class="cb-lang">javascript</span><button class="cb-copy" onclick="cp(this)">Copy</button></div>
+    <pre>fetch(<span class="str">"/employees"</span>)
+    .<span class="fn">then</span>(<span class="kw">function</span> (response) {
+        <span class="kw">return</span> response.<span class="fn">json</span>();
+    })
+    .<span class="fn">then</span>(<span class="kw">function</span> (data) {
+        console.<span class="fn">log</span>(data);
+    });
+
+<span class="kw">async function</span> <span class="fn">loadEmployees</span>() {
+    <span class="kw">const</span> response = <span class="kw">await</span> fetch(<span class="str">"/employees"</span>);
+    <span class="kw">const</span> data = <span class="kw">await</span> response.<span class="fn">json</span>();
+    console.<span class="fn">log</span>(data);
+}</pre>
+  </div>
+
+  <p>Compare with classic ODataModel:</p>
+  <div class="codeblock">
+    <div class="cb-head"><span class="cb-lang">javascript</span><button class="cb-copy" onclick="cp(this)">Copy</button></div>
+    <pre>oModel.<span class="fn">read</span>(<span class="str">"/Employees"</span>, {
+    success: <span class="kw">function</span> (oData) { console.<span class="fn">log</span>(oData.results); },
+    error:   <span class="kw">function</span> ()      { MessageToast.<span class="fn">show</span>(<span class="str">"Read failed"</span>); }
+});</pre>
+  </div>
+</article>
+
+<article class="article" id="js-modules">
+  <div class="art-eyebrow"><span class="art-category">JavaScript</span><span class="art-dot"></span><span style="font-size:11px;color:var(--ink-muted)">How UI5 loads files</span></div>
+  <h1>Modules &amp; Error Handling</h1>
+  <p class="lead"><code>sap.ui.define</code> is UI5’s module system — AMD. Each controller file declares dependencies, receives them as function parameters, and returns a class. <code>try / catch</code> stops a thrown error from killing the whole app.</p>
+
+  <div class="codeblock">
+    <div class="cb-head"><span class="cb-lang">javascript</span><button class="cb-copy" onclick="cp(this)">Copy</button></div>
+    <pre>sap.ui.<span class="fn">define</span>([
+    <span class="str">"sap/ui/core/mvc/Controller"</span>,
+    <span class="str">"sap/m/MessageToast"</span>
+], <span class="kw">function</span> (Controller, MessageToast) {
+    <span class="str">"use strict"</span>;
+    <span class="kw">return</span> Controller.<span class="fn">extend</span>(<span class="str">"demo.controller.Main"</span>, {
+        onSave: <span class="kw">function</span> () {
+            <span class="kw">try</span> {
+                MessageToast.<span class="fn">show</span>(<span class="str">"Saved"</span>);
+            } <span class="kw">catch</span> (err) {
+                console.<span class="fn">error</span>(err);
+            }
+        }
+    });
+});</pre>
+  </div>
+
+  <table class="kb-table">
+    <tr><th>Piece</th><th>Meaning</th></tr>
+    <tr><td>Dependency array</td><td>Modules to load (paths, not variables)</td></tr>
+    <tr><td>Factory function params</td><td>The loaded modules, in the same order</td></tr>
+    <tr><td><code>"use strict"</code></td><td>Catches sloppy JS (undeclared vars)</td></tr>
+    <tr><td><code>Controller.extend</code></td><td>Create a subclass — your controller</td></tr>
+  </table>
+</article>
+
+<article class="article" id="js-to-ui5">
+  <div class="art-eyebrow"><span class="art-category">JavaScript</span><span class="art-dot"></span><span style="font-size:11px;color:var(--ink-muted)">The bridge</span></div>
+  <h1>JavaScript → SAPUI5</h1>
+  <p class="lead">This is the lesson the rest of the knowledge base assumes. Same language, different APIs.</p>
+
+  <h2>What you already know</h2>
+  <div class="codeblock">
+    <div class="cb-head"><span class="cb-lang">javascript</span><button class="cb-copy" onclick="cp(this)">Copy</button></div>
+    <pre><span class="kw">const</span> employee = { name: <span class="str">"John"</span>, age: <span class="num">30</span> };
+
+<span class="kw">function</span> <span class="fn">showEmployee</span>(employee) {
+    console.<span class="fn">log</span>(employee.name);
+}</pre>
+  </div>
+
+  <h2>The same ideas in a controller</h2>
+  <div class="codeblock">
+    <div class="cb-head"><span class="cb-lang">javascript</span><button class="cb-copy" onclick="cp(this)">Copy</button></div>
+    <pre>sap.ui.<span class="fn">define</span>([
+    <span class="str">"sap/ui/core/mvc/Controller"</span>
+], <span class="kw">function</span> (Controller) {
+
+    <span class="str">"use strict"</span>;
+
+    <span class="kw">return</span> Controller.<span class="fn">extend</span>(<span class="str">"demo.controller.Main"</span>, {
+
+        onInit: <span class="kw">function</span> () {},
+
+        onSave: <span class="kw">function</span> (oEvent) {
+            <span class="kw">const</span> oInput = <span class="kw">this</span>.<span class="fn">byId</span>(<span class="str">"nameInput"</span>);
+            <span class="kw">const</span> sName = oInput.<span class="fn">getValue</span>();
+            console.<span class="fn">log</span>(sName);
+        }
+
+    });
+});</pre>
+  </div>
+
+  <table class="kb-table">
+    <tr><th>JavaScript concept</th><th>UI5 equivalent</th></tr>
+    <tr><td>function</td><td><code>onSave: function ()</code></td></tr>
+    <tr><td>object</td><td><code>this</code> (the controller)</td></tr>
+    <tr><td>method</td><td><code>this.byId()</code>, <code>getValue()</code></td></tr>
+    <tr><td>parameter</td><td><code>oEvent</code></td></tr>
+    <tr><td>string</td><td><code>sName</code></td></tr>
+    <tr><td>condition</td><td><code>if (sName)</code></td></tr>
+    <tr><td>array</td><td>model data / entity set</td></tr>
+    <tr><td>JSON object</td><td>JSONModel data</td></tr>
+    <tr><td>event</td><td><code>press=".onSave"</code></td></tr>
+    <tr><td>module</td><td><code>sap.ui.define()</code></td></tr>
+  </table>
+
+  <div class="callout callout-tip"><span class="ci">💡</span><div>Continue next with <strong>Architecture &amp; Structure</strong> — MVC, XML views, and controllers. You now have the JavaScript those articles assume.</div></div>
+</article>
 
 <!-- ═══════════ BTP OVERVIEW ═══════════ -->
 <article class="article" id="btp-overview">
@@ -1670,9 +2749,10 @@ sap.m.MessageToast.<span class="fn">show</span>(sMsg);</pre>
 <!-- ═══════════ GLOSSARY ═══════════ -->
 <div id="glossary-section">
   <h1>Glossary</h1>
-  <p class="lead">Definitions for all key terms across SAP BTP, Fiori, SAPUI5, OData, and routing.</p>
+  <p class="lead">Definitions for key terms across HTML, CSS, JavaScript, SAP BTP, Fiori, SAPUI5, OData, and routing.</p>
   <div class="g-filters">
     <button class="g-btn on" onclick="gf('all',this)">All</button>
+    <button class="g-btn" onclick="gf('web',this)">Web</button>
     <button class="g-btn" onclick="gf('btp',this)">BTP / Cloud</button>
     <button class="g-btn" onclick="gf('ui5',this)">SAPUI5</button>
     <button class="g-btn" onclick="gf('fiori',this)">Fiori</button>
@@ -1680,6 +2760,17 @@ sap.m.MessageToast.<span class="fn">show</span>(sMsg);</pre>
     <button class="g-btn" onclick="gf('routing',this)">Routing</button>
   </div>
   <div class="g-grid" id="gg">
+
+    <div class="g-card" data-c="web"><div class="g-term">HTML <span class="g-cat">Web</span></div><div class="g-def">HyperText Markup Language — defines what exists on a page. The UI5 equivalent is an XML View, which defines what controls exist.</div></div>
+    <div class="g-card" data-c="web"><div class="g-term">CSS <span class="g-cat">Web</span></div><div class="g-def">Cascading Style Sheets — defines how things look. In Fiori, prefer the theme and <code>sapUi*</code> helper classes over custom restyling of controls.</div></div>
+    <div class="g-card" data-c="web"><div class="g-term">JavaScript <span class="g-cat">Web</span></div><div class="g-def">The language of SAPUI5 controllers. Functions, objects, events, and <code>this</code> are the concepts you must recognise immediately.</div></div>
+    <div class="g-card" data-c="web"><div class="g-term">DOM <span class="g-cat">Web</span></div><div class="g-def">The browser’s live HTML tree. Vanilla JS manipulates it directly. UI5 manages it for you via the control tree — avoid <code>document.getElementById</code> in controllers.</div></div>
+    <div class="g-card" data-c="web"><div class="g-term">Box Model <span class="g-cat">Web</span></div><div class="g-def">Every element is content + padding + border + margin. Layout bugs in custom CSS are usually a box-model misunderstanding.</div></div>
+    <div class="g-card" data-c="web"><div class="g-term">Flexbox <span class="g-cat">Web</span></div><div class="g-def">One-dimensional layout with <code>justify-content</code> and <code>align-items</code>. Mental model behind <code>HBox</code> and <code>VBox</code>.</div></div>
+    <div class="g-card" data-c="web"><div class="g-term">JSON <span class="g-cat">Web</span></div><div class="g-def">Text format for objects and arrays. A JSONModel is that shape living in the browser. <code>JSON.stringify</code> / <code>JSON.parse</code> convert between text and objects.</div></div>
+    <div class="g-card" data-c="web"><div class="g-term">this <span class="g-cat">Web</span></div><div class="g-def">The object a method was called on. In a controller method written as <code>function</code>, <code>this</code> is the controller — so <code>this.byId()</code> works.</div></div>
+    <div class="g-card" data-c="web"><div class="g-term">Event <span class="g-cat">Web</span></div><div class="g-def">A signal that something happened. HTML: <code>addEventListener("click")</code>. UI5: <code>press=".onSave"</code> plus <code>oEvent</code> in the handler.</div></div>
+    <div class="g-card" data-c="web"><div class="g-term">sap.ui.define <span class="g-cat">Web</span></div><div class="g-def">UI5’s AMD module loader. Dependency paths in the array become factory-function parameters, in the same order.</div></div>
 
     <div class="g-card" data-c="btp"><div class="g-term">BTP <span class="g-cat">BTP</span></div><div class="g-def">SAP Business Technology Platform — SAP's unified cloud platform. Hosts Cloud Foundry apps, HANA databases, Integration Suite, and all services consumed by Fiori applications.</div></div>
     <div class="g-card" data-c="btp"><div class="g-term">Cloud Foundry <span class="g-cat">BTP</span></div><div class="g-def">The PaaS runtime inside BTP. Handles server infrastructure, auto-scaling, and app lifecycle. SAPUI5 apps are deployed here as MTA archives.</div></div>
@@ -1771,8 +2862,10 @@ function go(id) {
   var y = el.getBoundingClientRect().top + window.pageYOffset - 62;
   window.scrollTo({ top: y, behavior: 'smooth' });
   document.getElementById('sidebar').classList.remove('open');
-  // highlight active links
-  document.querySelectorAll('.sb-art-link').forEach(function(a) { a.classList.remove('active'); });
+  document.querySelectorAll('.sb-art-link').forEach(function(a) {
+    var onclick = a.getAttribute('onclick') || '';
+    a.classList.toggle('active', onclick.indexOf("'" + id + "'") !== -1);
+  });
 }
 
 // ── COPY CODE ──────────────────────────────
@@ -1782,6 +2875,21 @@ function cp(btn) {
     btn.textContent = '✓ Copied'; btn.classList.add('ok');
     setTimeout(function() { btn.textContent = 'Copy'; btn.classList.remove('ok'); }, 2000);
   });
+}
+
+function setFlex(btn, value) {
+  var stage = document.getElementById('flex-stage');
+  if (!stage) return;
+  stage.style.justifyContent = value;
+  btn.parentNode.querySelectorAll('button').forEach(function (b) { b.classList.remove('on'); });
+  btn.classList.add('on');
+}
+
+function runDomDemo() {
+  var input = document.getElementById('dom-name');
+  var msg = document.getElementById('demo-msg');
+  if (!input || !msg) return;
+  msg.textContent = input.value ? ('Saved: ' + input.value) : 'Enter a name first.';
 }
 
 // ── SEARCH ────────────────────────────────
